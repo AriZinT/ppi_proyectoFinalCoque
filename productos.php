@@ -13,34 +13,35 @@
 <body>
     <!-- Contenedor principal de BS5 -->
      <div class="container-fluid">
-        <nav class="navbar navbar-expand-sm bg-danger navbar-danger">
+     <nav class="navbar navbar-expand-sm bg-danger navbar-danger">
             <div class="container-fluid">
-              <ul class="navbar-nav">
-                <li>
-                    <a class="navbar-brand" href="index.html">
-                        <img src="logo_insatagram.jpg.png" alt="Insatagram Logo" style="width:40px;" class="rounded-pill"> 
-                    </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="index.html">Inicio</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link active" href="productos.php">Productos</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="consulta.php">Consulta</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="about.html">Acerca de</a>
-                </li>
-              </ul>
+              <a class="navbar-brand" href="#">Logo</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link" href="index.html">Página Principal</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" href="productos.php">Productos</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                  </li>
+                </ul>
+              </div>
             </div>
-          </nav>
+          </nav> 
         <div class="mt-4 p-5 bg-light text-white rounded">
             <h1 class="text-danger">C O Q U É</h1>
         </div>
         <div class="container">
-            <h2 class="my-5">Red social cool.</h2>
+            <h2 class="my-5">Productos</h2>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt similique quibusdam id enim iste exercitationem sapiente error saepe aliquid amet. Dolorem provident et voluptate pariatur. Corrupti aspernatur necessitatibus distinctio soluta.</p>
             <p>Possimus ipsam vero, iure ullam vitae magnam quidem omnis voluptatum cumque harum aut neque pariatur distinctio explicabo eveniet aliquam officia maiores iusto tenetur voluptas, voluptates eligendi dicta assumenda? Numquam, modi?</p>
             <p>Sunt quo recusandae at perferendis obcaecati error, omnis iusto optio nisi consequuntur quibusdam deleniti soluta maxime aut beatae, doloribus ad autem modi iste ea? Aliquam consequuntur velit explicabo voluptatum voluptate.</p>
