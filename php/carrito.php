@@ -16,35 +16,35 @@
         <nav class="navbar navbar-expand-sm bg-light navbar-light">
             <div class="container-fluid">
               <!-- <a class="navbar-brand" href="#">Logo</a> -->
-              <img src="img/coque.jpg" alt="Coque Logo" style="width:40px;" class="rounded-pill">
+              <img src="../img/coque.jpg" alt="Coque Logo" style="width:40px;" class="rounded-pill"> 
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
                   <li class="nav-item">
-                    <a class="nav-link text-danger active" href="index.html">Página Principal</a>
+                    <a class="nav-link text-danger active" href="../index.html">Página Principal</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link text-danger" href="php/productos.php">Productos</a>
+                    <a class="nav-link  text-danger" href="productos.php">Productos</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link text-danger" href="php/carrito.php">Carrito</a>
+                    <a class="nav-link text-danger" href="#">Carrito</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link text-danger" href="php/historial.php">Tu Historial</a>
+                    <a class="nav-link text-danger" href="historial.php">Tu Historial</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link text-danger" href="php/perfil_usuario.php">Tu Perfil</a>
+                    <a class="nav-link text-danger" href="perfil_usuario.php">Tu Perfil</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link text-danger" href="php/nueva_cuenta.php">Nueva Cuenta</a>
+                    <a class="nav-link text-danger" href="nueva_cuenta.php">Nueva Cuenta</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link text-danger" href="php/admin.php">Administración</a>
+                    <a class="nav-link text-danger" href="admin.php">Administración</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link text-danger" href="about.html">Acerca de Nosotros</a>
+                    <a class="nav-link text-danger" href="../about.html">Acerca de Nosotros</a>
                   </li>
                 </ul>
               </div>
@@ -54,7 +54,7 @@
             <h1 class="text-danger">C O Q U É</h1>
         </div>
         <div class="container">
-            <h2 class="my-5">Acerca de Coqué</h2>
+            <h2 class="my-5">Carrito</h2>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt similique quibusdam id enim iste exercitationem sapiente error saepe aliquid amet. Dolorem provident et voluptate pariatur. Corrupti aspernatur necessitatibus distinctio soluta.</p>
             <p>Possimus ipsam vero, iure ullam vitae magnam quidem omnis voluptatum cumque harum aut neque pariatur distinctio explicabo eveniet aliquam officia maiores iusto tenetur voluptas, voluptates eligendi dicta assumenda? Numquam, modi?</p>
             <p>Sunt quo recusandae at perferendis obcaecati error, omnis iusto optio nisi consequuntur quibusdam deleniti soluta maxime aut beatae, doloribus ad autem modi iste ea? Aliquam consequuntur velit explicabo voluptatum voluptate.</p>
