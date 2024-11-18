@@ -1,3 +1,31 @@
+<?php
+    include("conexion_db.php");
+
+    $query = "SELECT 
+            p.nombre_p AS nombre_producto, 
+            p.foto_p AS foto_producto, 
+            p.descripcion_p AS descripcion_producto, 
+            p.precio_p AS precio_producto, 
+            c.nombre_cat AS nombre_categoria
+        FROM 
+            producto p
+        JOIN 
+            categoria c ON p.id_categoria = c.id_categoria;";
+        if (mysqli_connect_errno()) {
+          echo "<div class=\"alert alert-danger\"><strong>Error!</strong>" . mysqli_connect_error() . "</div>";
+        }
+        $result = mysqli_query($con, $query);
+
+        $productos = []; //crea un arreglo para guardar los productos
+
+        if ($result->num_rows > 0) { //si si hay elementos en la consulta
+          while ($row = $result->fetch_assoc()) { //crea un arreglo asociativo
+          $productos[] = $row;
+          }
+        }
+    mysqli_close($con);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,11 +83,21 @@
         </div>
         <div class="container">
             <h2 class="my-5">Productos</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt similique quibusdam id enim iste exercitationem sapiente error saepe aliquid amet. Dolorem provident et voluptate pariatur. Corrupti aspernatur necessitatibus distinctio soluta.</p>
-            <p>Possimus ipsam vero, iure ullam vitae magnam quidem omnis voluptatum cumque harum aut neque pariatur distinctio explicabo eveniet aliquam officia maiores iusto tenetur voluptas, voluptates eligendi dicta assumenda? Numquam, modi?</p>
-            <p>Sunt quo recusandae at perferendis obcaecati error, omnis iusto optio nisi consequuntur quibusdam deleniti soluta maxime aut beatae, doloribus ad autem modi iste ea? Aliquam consequuntur velit explicabo voluptatum voluptate.</p>
-            <p>Corporis perferendis consequuntur, labore quisquam explicabo recusandae asperiores ipsa nulla numquam quia facilis fuga quasi fugit officiis similique ullam modi nostrum illum rem sunt. Provident dolorum distinctio delectus velit a?</p>
-            <p>Possimus obcaecati accusantium ipsum ab, ducimus quisquam molestiae iusto debitis incidunt. Optio natus voluptas rem voluptatem ut nihil dolorem maiores veniam deserunt sint quaerat dicta sequi, beatae quidem assumenda recusandae.</p>
+            <div class="row">
+                <?php foreach ($productos as $producto): ?>
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <img src="data:image/jpeg;base64,<?= base64_encode($producto['foto_producto']); ?>" class="card-img-top" alt="<?= htmlspecialchars($producto['nombre_producto']); ?>">
+                            <div class="card-body">
+                                <h5 class="card-title"><?= htmlspecialchars($producto['nombre_producto']); ?></h5>
+                                <p class="card-text"><?= htmlspecialchars($producto['descripcion_producto']); ?></p>
+                                <p class="card-text"><strong>Precio:</strong> $<?= number_format($producto['precio_producto'], 2); ?></p>
+                                <p class="card-text"><em>Categoría:</em> <?= htmlspecialchars($producto['nombre_categoria']); ?></p>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
         </div>
      </div>
     
