@@ -54,12 +54,38 @@
             <h1 class="text-danger">C O Q U É</h1>
         </div>
         <div class="container">
-            <h2 class="my-5">Nueva Cuenta</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt similique quibusdam id enim iste exercitationem sapiente error saepe aliquid amet. Dolorem provident et voluptate pariatur. Corrupti aspernatur necessitatibus distinctio soluta.</p>
-            <p>Possimus ipsam vero, iure ullam vitae magnam quidem omnis voluptatum cumque harum aut neque pariatur distinctio explicabo eveniet aliquam officia maiores iusto tenetur voluptas, voluptates eligendi dicta assumenda? Numquam, modi?</p>
-            <p>Sunt quo recusandae at perferendis obcaecati error, omnis iusto optio nisi consequuntur quibusdam deleniti soluta maxime aut beatae, doloribus ad autem modi iste ea? Aliquam consequuntur velit explicabo voluptatum voluptate.</p>
-            <p>Corporis perferendis consequuntur, labore quisquam explicabo recusandae asperiores ipsa nulla numquam quia facilis fuga quasi fugit officiis similique ullam modi nostrum illum rem sunt. Provident dolorum distinctio delectus velit a?</p>
-            <p>Possimus obcaecati accusantium ipsum ab, ducimus quisquam molestiae iusto debitis incidunt. Optio natus voluptas rem voluptatem ut nihil dolorem maiores veniam deserunt sint quaerat dicta sequi, beatae quidem assumenda recusandae.</p>
+          <h2 class="my-5">Creación de nueva cuenta</h2>
+            <form action="confirmacion.php" method="post">
+              <div class="mb-3 mt-3">
+                  <label for="nombre_u" class="form-label">Nombre:</label>
+                  <input type="text" class="form-control" id="nombre_u" placeholder="Ingrese su nombre completo" name="nombre_u">
+              </div>
+              <div class="mb-3 mt-3">
+                <label for="correo_u" class="form-label">Correo:</label>
+                <input type="email" class="form-control" id="correo_u" placeholder="Ingrese su correo" name="correo_u">
+              </div>
+              <div class="mb-3">
+                <label for="fecha_nac_u" class="form-label">Fecha de Nacimiento:</label>
+                <input type="date" class="form-control" id="fecha_nac_u" name="fecha_nac_u">
+              </div>
+              <div class="mb-3">
+                <label for="num_tarjeta_u" class="form-label">Número de tarjeta:</label>
+                <input type="number" class="form-control" id="num_tarjeta_u" placeholder="Ingrese su número de tarjeta" name="num_tarjeta_u">
+              </div>
+              <div class="mb-3 mt-3">
+                  <label for="passwd_u" class="form-label">Contraseña:</label>
+                  <input type="text" class="form-control" id="passwd_u" placeholder="Ingrese una contraseña" name="passwd_u">
+              </div>
+              <div class="mb-3 mt-3">
+                  <label for="direccion_postal_u" class="form-label">Dirección Postal:</label>
+                  <input type="text" class="form-control" id="direccion_postal_u" placeholder="Ingrese su dirección" name="direccion_postal_u">
+              </div>
+              <div class="mb-3">
+                <label for="telefono_u" class="form-label">Número telefónico:</label>
+                <input type="number" class="form-control" id="telefono_u" placeholder="Ingrese su número telefónico" name="telefono_u">
+              </div>
+              <button type="submit" class="btn btn-danger">Registrar</button>
+            </form>
         </div>
      </div>
     
