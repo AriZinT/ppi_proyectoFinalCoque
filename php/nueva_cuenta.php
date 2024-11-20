@@ -84,7 +84,7 @@
                 <label for="telefono_u" class="form-label">Número telefónico:</label>
                 <input type="number" class="form-control" id="telefono_u" placeholder="Ingrese su número telefónico" name="telefono_u">
               </div>
-              <button type="submit" class="btn btn-danger">Registrar</button>
+              <button type="submit" class="btn btn-danger mb-3">Registrar</button>
             </form>
         </div>
      </div>
