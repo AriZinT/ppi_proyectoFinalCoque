@@ -54,13 +54,30 @@
             <h1 class="text-danger">C O Q U É</h1>
         </div>
         <div class="container">
-            <h2 class="my-5">Perfil de Administración</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt similique quibusdam id enim iste exercitationem sapiente error saepe aliquid amet. Dolorem provident et voluptate pariatur. Corrupti aspernatur necessitatibus distinctio soluta.</p>
-            <p>Possimus ipsam vero, iure ullam vitae magnam quidem omnis voluptatum cumque harum aut neque pariatur distinctio explicabo eveniet aliquam officia maiores iusto tenetur voluptas, voluptates eligendi dicta assumenda? Numquam, modi?</p>
-            <p>Sunt quo recusandae at perferendis obcaecati error, omnis iusto optio nisi consequuntur quibusdam deleniti soluta maxime aut beatae, doloribus ad autem modi iste ea? Aliquam consequuntur velit explicabo voluptatum voluptate.</p>
-            <p>Corporis perferendis consequuntur, labore quisquam explicabo recusandae asperiores ipsa nulla numquam quia facilis fuga quasi fugit officiis similique ullam modi nostrum illum rem sunt. Provident dolorum distinctio delectus velit a?</p>
-            <p>Possimus obcaecati accusantium ipsum ab, ducimus quisquam molestiae iusto debitis incidunt. Optio natus voluptas rem voluptatem ut nihil dolorem maiores veniam deserunt sint quaerat dicta sequi, beatae quidem assumenda recusandae.</p>
-        </div>
+              <div class="container my-5">
+                <h2 class="text-center mb-4">Opciones de Administración</h2>
+                <div class="row justify-content-center">
+                    <!--Para modificar producto-->
+                    <div class="col-md-4 mb-3">
+                        <a href="admin_modificar_prod.php" class="btn btn-danger w-100 py-3">
+                            Modificar Producto
+                        </a>
+                    </div>
+                    <!-- Para crear nuevo producto -->
+                    <div class="col-md-4 mb-3">
+                        <a href="admin_crear_prod.php" class="btn btn-danger w-100 py-3">
+                            Crear Producto
+                        </a>
+                    </div>
+                    <!--para historial de compras-->
+                    <div class="col-md-4 mb-3">
+                        <a href="admin_mostrar_historial.php" class="btn btn-danger text-white w-100 py-3">
+                            Mostrar Historial
+                        </a>
+                    </div>
+                </div>
+              </div>
+          </div>
      </div>
     
 </body>
