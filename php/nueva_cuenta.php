@@ -23,7 +23,7 @@
               <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
                   <li class="nav-item">
-                    <a class="nav-link text-danger active" href="../index.html">Página Principal</a>
+                    <a class="nav-link text-danger active" href="../index.php">Página Principal</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link  text-danger" href="productos.php">Productos</a>
@@ -44,7 +44,26 @@
                     <a class="nav-link text-danger" href="admin.php">Administración</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link text-danger" href="../about.html">Acerca de Nosotros</a>
+                    <a class="nav-link text-danger" href="../about.php">Acerca de Nosotros</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-danger" href=
+                    <?php
+                      if (isset($_SESSION['id_usuario'])){
+                        echo "./logout.php";
+                      }else{
+                        echo "./login.php";
+                      }
+                    ?>
+                    > 
+                      <?php
+                      if (isset($_SESSION['id_usuario'])){
+                        echo 'Cerrar Sesión';
+                      }else{
+                        echo 'Iniciar Sesión';
+                      }
+                    ?>
+                    </a>
                   </li>
                 </ul>
               </div>
@@ -74,7 +93,7 @@
               </div>
               <div class="mb-3 mt-3">
                   <label for="passwd_u" class="form-label">Contraseña:</label>
-                  <input type="text" class="form-control" id="passwd_u" placeholder="Ingrese una contraseña" name="passwd_u">
+                  <input type="password" class="form-control" id="passwd_u" placeholder="Ingrese una contraseña" name="passwd_u">
               </div>
               <div class="mb-3 mt-3">
                   <label for="direccion_postal_u" class="form-label">Dirección Postal:</label>

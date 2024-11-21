@@ -1,7 +1,9 @@
 <?php
+    session_start();
     include("conexion_db.php");
 
     $query = "SELECT 
+            p.id_producto AS id_producto,
             p.nombre_p AS nombre_producto, 
             p.foto_p AS foto_producto, 
             p.descripcion_p AS descripcion_producto, 
@@ -22,6 +24,7 @@
           while ($row = $result->fetch_assoc()) { //crea un arreglo asociativo
           $productos[] = $row;
           }
+          // echo var_dump($productos[0]['nombre_p']);
         }
     mysqli_close($con);
 ?>
@@ -51,10 +54,10 @@
               <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
                   <li class="nav-item">
-                    <a class="nav-link text-danger" href="../index.html">Página Principal</a>
+                    <a class="nav-link text-danger" href="../index.php">Página Principal</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link text-danger active" href="php/productos.php">Productos</a>
+                    <a class="nav-link text-danger active" href="productos.php">Productos</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link text-danger" href="carrito.php">Carrito</a>
@@ -72,7 +75,26 @@
                     <a class="nav-link text-danger" href="admin.php">Administración</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link text-danger" href="../about.html">Acerca de Nosotros</a>
+                    <a class="nav-link text-danger" href="../about.php">Acerca de Nosotros</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-danger" href=
+                    <?php
+                      if (isset($_SESSION['id_usuario'])){
+                        echo "./logout.php";
+                      }else{
+                        echo "./login.php";
+                      }
+                    ?>
+                    > 
+                      <?php
+                      if (isset($_SESSION['id_usuario'])){
+                        echo 'Cerrar Sesión';
+                      }else{
+                        echo 'Iniciar Sesión';
+                      }
+                    ?>
+                    </a>
                   </li>
                 </ul>
               </div>
@@ -93,6 +115,11 @@
                                 <p class="card-text"><?= htmlspecialchars($producto['descripcion_producto']); ?></p>
                                 <p class="card-text"><strong>Precio:</strong> $<?= number_format($producto['precio_producto'], 2); ?></p>
                                 <p class="card-text"><em>Categoría:</em> <?= htmlspecialchars($producto['nombre_categoria']); ?></p>
+                                <!--botón para agregar al carrito -->
+                                <form action="agregar_al_carrito.php" method="POST">
+                                    <input type="hidden" name="id_producto" value="<?= $producto['id_producto']; ?>">
+                                    <button type="submit" class="btn btn-danger">Agregar al Carrito</button>
+                                </form>
                             </div>
                         </div>
                     </div>

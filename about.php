@@ -1,3 +1,6 @@
+<?php
+  session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +26,7 @@
               <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
                   <li class="nav-item">
-                    <a class="nav-link text-danger active" href="index.html">Página Principal</a>
+                    <a class="nav-link text-danger active" href="index.php">Página Principal</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link text-danger" href="php/productos.php">Productos</a>
@@ -44,7 +47,26 @@
                     <a class="nav-link text-danger" href="php/admin.php">Administración</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link text-danger" href="about.html">Acerca de Nosotros</a>
+                    <a class="nav-link text-danger" href="about.php">Acerca de Nosotros</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-danger" href=
+                    <?php
+                      if (isset($_SESSION['id_usuario'])){
+                        echo "php/logout.php";
+                      }else{
+                        echo "php/login.php";
+                      }
+                    ?>
+                    > 
+                      <?php
+                      if (isset($_SESSION['id_usuario'])){
+                        echo 'Cerrar Sesión';
+                      }else{
+                        echo 'Iniciar Sesión';
+                      }
+                    ?>
+                    </a>
                   </li>
                 </ul>
               </div>
@@ -54,7 +76,7 @@
             <h1 class="text-danger">C O Q U É</h1>
         </div>
         <div class="container">
-            <h2 class="my-5">Bienvenido</h2>
+            <h2 class="my-5">Acerca de Coqué</h2>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt similique quibusdam id enim iste exercitationem sapiente error saepe aliquid amet. Dolorem provident et voluptate pariatur. Corrupti aspernatur necessitatibus distinctio soluta.</p>
             <p>Possimus ipsam vero, iure ullam vitae magnam quidem omnis voluptatum cumque harum aut neque pariatur distinctio explicabo eveniet aliquam officia maiores iusto tenetur voluptas, voluptates eligendi dicta assumenda? Numquam, modi?</p>
             <p>Sunt quo recusandae at perferendis obcaecati error, omnis iusto optio nisi consequuntur quibusdam deleniti soluta maxime aut beatae, doloribus ad autem modi iste ea? Aliquam consequuntur velit explicabo voluptatum voluptate.</p>

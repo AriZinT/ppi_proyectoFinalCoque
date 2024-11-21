@@ -1,25 +1,39 @@
 <?php
-  session_start();
+session_start(); // Inicia la sesión
+include 'conexion_db.php'; // Conexión a la base de datos
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $correo = mysqli_real_escape_string($con, $_POST['correo']);
+    $passwd = mysqli_real_escape_string($con, $_POST['passwd']);
+
+    $query = "SELECT * FROM usuario WHERE correo_u='$correo' AND passwd_u='$passwd'";
+    $result = mysqli_query($con, $query);
+//mysqli_num_rows devuelve la cantidad de líneas que devuelve el query, sería 0 si no hay coincidencia, 1 si la hay
+    if (mysqli_num_rows($result) == 1) {
+        $usuario = mysqli_fetch_assoc($result);
+        $_SESSION['id_usuario'] = $usuario['id_usuario'];
+        $_SESSION['nombre'] = $usuario['nombre_u'];
+        header("Location: perfil_usuario.php"); // Redirige al perfil, indica al navegador que se diriga a otro lado
+    } else {
+        $error = "Correo o contraseña incorrectos";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coque</title>
-      <!-- Latest compiled and minified CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- Latest compiled JavaScript -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> 
+    <title>Login - Coqué</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Contenedor principal de BS5 -->
+     <!-- Contenedor principal de BS5 -->
      <div class="container-fluid">
         <nav class="navbar navbar-expand-sm bg-light navbar-light">
             <div class="container-fluid">
               <!-- <a class="navbar-brand" href="#">Logo</a> -->
-              <img src="../img/coque.jpg" alt="Coque Logo" style="width:40px;" class="rounded-pill"> 
+              <img src="../img/coque.jpg" alt="Coque Logo" style="width:40px;" class="rounded-pill">
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -29,7 +43,7 @@
                     <a class="nav-link text-danger active" href="../index.php">Página Principal</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link  text-danger" href="productos.php">Productos</a>
+                    <a class="nav-link text-danger" href="productos.php">Productos</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link text-danger" href="carrito.php">Carrito</a>
@@ -37,9 +51,8 @@
                   <li class="nav-item">
                     <a class="nav-link text-danger" href="historial.php">Tu Historial</a>
                   </li>
-                 
                   <li class="nav-item">
-                    <a class="nav-link text-danger" href="#">Tu Perfil</a>
+                    <a class="nav-link text-danger" href="perfil_usuario.php">Tu Perfil</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link text-danger" href="nueva_cuenta.php">Nueva Cuenta</a>
@@ -76,23 +89,24 @@
         <div class="mt-4 p-5 bg-light text-white rounded">
             <h1 class="text-danger">C O Q U É</h1>
         </div>
-        <div class="container">
-            <h2 class="my-5">Tu Perfil de Usuario</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt similique quibusdam id enim iste exercitationem sapiente error saepe aliquid amet. Dolorem provident et voluptate pariatur. Corrupti aspernatur necessitatibus distinctio soluta.</p>
-            <p>Possimus ipsam vero, iure ullam vitae magnam quidem omnis voluptatum cumque harum aut neque pariatur distinctio explicabo eveniet aliquam officia maiores iusto tenetur voluptas, voluptates eligendi dicta assumenda? Numquam, modi?</p>
-            <p>Sunt quo recusandae at perferendis obcaecati error, omnis iusto optio nisi consequuntur quibusdam deleniti soluta maxime aut beatae, doloribus ad autem modi iste ea? Aliquam consequuntur velit explicabo voluptatum voluptate.</p>
-            <p>Corporis perferendis consequuntur, labore quisquam explicabo recusandae asperiores ipsa nulla numquam quia facilis fuga quasi fugit officiis similique ullam modi nostrum illum rem sunt. Provident dolorum distinctio delectus velit a?</p>
-            <p>Possimus obcaecati accusantium ipsum ab, ducimus quisquam molestiae iusto debitis incidunt. Optio natus voluptas rem voluptatem ut nihil dolorem maiores veniam deserunt sint quaerat dicta sequi, beatae quidem assumenda recusandae.</p>
-        </div>
      </div>
-     <?php
-      print_r($_SESSION);
-      if (isset($_SESSION['id_usuario'])){
-        echo 'sesión iniciada';
-      }else{
-        echo 'sesión no iniciada';
-      }
-     ?>
-    
+    <div class="container mt-5">
+        <h2 class="text-center">Inicia Sesión</h2>
+    <!-- isset determina si una varibale esta definida y no es null -->
+        <?php if (isset($error)) { echo "<div class='alert alert-danger'>$error</div>"; } ?>
+        <form method="POST" action="login.php">
+            <div class="mb-3">
+                <label for="correo" class="form-label">Correo electrónico:</label>
+                <input type="email" class="form-control" id="correo" name="correo" required>
+            </div>
+            <div class="mb-3">
+                <label for="passwd" class="form-label">Contraseña:</label>
+                <input type="password" class="form-control" id="passwd" name="passwd" required>
+            </div>
+            <button type="submit" class="btn btn-danger">Iniciar Sesión</button>
+        </form>
+        <p class="mt-3">¿No tienes cuenta? <a href="nueva_cuenta.php" class="text-danger">Regístrate aquí</a>.</p>
+    </div>
+    <?php mysqli_close($con); ?>
 </body>
 </html>

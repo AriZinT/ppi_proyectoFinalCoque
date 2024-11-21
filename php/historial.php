@@ -1,3 +1,6 @@
+<?php
+  session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +26,7 @@
               <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
                   <li class="nav-item">
-                    <a class="nav-link text-danger active" href="../index.html">Página Principal</a>
+                    <a class="nav-link text-danger active" href="../index.php">Página Principal</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link  text-danger" href="productos.php">Productos</a>
@@ -44,7 +47,26 @@
                     <a class="nav-link text-danger" href="admin.php">Administración</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link text-danger" href="../about.html">Acerca de Nosotros</a>
+                    <a class="nav-link text-danger" href="../about.php">Acerca de Nosotros</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-danger" href=
+                    <?php
+                      if (isset($_SESSION['id_usuario'])){
+                        echo "./logout.php";
+                      }else{
+                        echo "./login.php";
+                      }
+                    ?>
+                    > 
+                      <?php
+                      if (isset($_SESSION['id_usuario'])){
+                        echo 'Cerrar Sesión';
+                      }else{
+                        echo 'Iniciar Sesión';
+                      }
+                    ?>
+                    </a>
                   </li>
                 </ul>
               </div>
