@@ -1,5 +1,46 @@
 <?php
   session_start();
+  include("conexion_db.php");
+
+  if (!isset($_SESSION['id_usuario'])) {
+      header("Location: login.php"); //debe redirigir a login para poder agregar al carrito
+      exit();
+  }
+
+  $id_usuario = $_SESSION['id_usuario'];
+
+
+    $query_carrito = "
+    SELECT 
+        p.nombre_p AS nombre_producto, 
+        c.cantidad_c AS cantidad, 
+        (c.cantidad_c * p.precio_p) AS total_producto
+    FROM 
+        carrito c
+    JOIN 
+        producto p ON c.id_producto = p.id_producto
+    WHERE 
+        c.id_usuario = $id_usuario;";
+
+    if (mysqli_connect_errno()) {
+        echo "<div class=\"alert alert-danger\"><strong>Error!</strong>" . mysqli_connect_error() . "</div>";
+    }
+    $result_carrito = mysqli_query($con, $query_carrito);
+    
+    $query_total = "
+    SELECT 
+        SUM(c.cantidad_c * p.precio_p) AS total_precio
+    FROM 
+        carrito c
+    JOIN 
+        producto p ON c.id_producto = p.id_producto
+    WHERE 
+        c.id_usuario = $id_usuario;";
+
+    $result_total = mysqli_query($con, $query_total);
+    $total_precio = mysqli_fetch_assoc($result_total)['total_precio'];
+
+    mysqli_close($con);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -77,11 +118,27 @@
         </div>
         <div class="container">
             <h2 class="my-5">Carrito</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt similique quibusdam id enim iste exercitationem sapiente error saepe aliquid amet. Dolorem provident et voluptate pariatur. Corrupti aspernatur necessitatibus distinctio soluta.</p>
-            <p>Possimus ipsam vero, iure ullam vitae magnam quidem omnis voluptatum cumque harum aut neque pariatur distinctio explicabo eveniet aliquam officia maiores iusto tenetur voluptas, voluptates eligendi dicta assumenda? Numquam, modi?</p>
-            <p>Sunt quo recusandae at perferendis obcaecati error, omnis iusto optio nisi consequuntur quibusdam deleniti soluta maxime aut beatae, doloribus ad autem modi iste ea? Aliquam consequuntur velit explicabo voluptatum voluptate.</p>
-            <p>Corporis perferendis consequuntur, labore quisquam explicabo recusandae asperiores ipsa nulla numquam quia facilis fuga quasi fugit officiis similique ullam modi nostrum illum rem sunt. Provident dolorum distinctio delectus velit a?</p>
-            <p>Possimus obcaecati accusantium ipsum ab, ducimus quisquam molestiae iusto debitis incidunt. Optio natus voluptas rem voluptatem ut nihil dolorem maiores veniam deserunt sint quaerat dicta sequi, beatae quidem assumenda recusandae.</p>
+            <table class="table striped">
+            <thead>
+                <tr>
+                    <th>Nombre del producto</th>
+                    <th>Cantidad</th>
+                    <th>Total por producto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    while($row = mysqli_fetch_array($result_carrito)) {
+                        echo "<tr>";
+                        echo "<td>" . $row['nombre_producto'] . "</td>";
+                        echo "<td>" . $row['cantidad'] . "</td>";
+                        echo "<td>" . $row['total_producto'] . "</td>";
+                        echo "</tr>";
+                    }
+                ?>
+            </tbody>
+        </table>
+        <p><strong>Total del carrito:</strong> $<?= number_format($total_precio, 2); ?></p>
         </div>
      </div>
     
