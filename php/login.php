@@ -91,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
      </div>
     <div class="container mt-5">
-        <h2 class="text-center">Inicia Sesión</h2>
+        <h2 class="text-center">Antes, inicia Sesión:</h2>
     <!-- isset determina si una varibale esta definida y no es null -->
         <?php if (isset($error)) { echo "<div class='alert alert-danger'>$error</div>"; } ?>
         <form method="POST" action="login.php">

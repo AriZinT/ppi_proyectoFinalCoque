@@ -139,6 +139,9 @@
             </tbody>
         </table>
         <p><strong>Total del carrito:</strong> $<?= number_format($total_precio, 2); ?></p>
+        <form action="realizar_compra.php" method="POST">
+          <button type="submit" class="btn btn-danger">Realizar compra</button>
+        </form>
         </div>
      </div>
     

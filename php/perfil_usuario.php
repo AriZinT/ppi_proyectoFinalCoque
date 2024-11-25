@@ -39,7 +39,15 @@
                   </li>
                  
                   <li class="nav-item">
-                    <a class="nav-link text-danger" href="#">Tu Perfil</a>
+                    <a class="nav-link text-danger" href="#">Tu Perfil:
+                    <?php
+                      if (isset($_SESSION['id_usuario'])){
+                        echo $_SESSION['nombre'];
+                      }else{
+                        echo 'Tu Perfil';
+                      }
+                    ?>
+                    </a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link text-danger" href="nueva_cuenta.php">Nueva Cuenta</a>
@@ -77,7 +85,7 @@
             <h1 class="text-danger">C O Q U É</h1>
         </div>
         <div class="container">
-            <h2 class="my-5">Tu Perfil de Usuario</h2>
+            <h2 class="my-5">Tu Perfil de Usuario: <?php echo '<p>' . $_SESSION['nombre'] . '<p>' ?></h2>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt similique quibusdam id enim iste exercitationem sapiente error saepe aliquid amet. Dolorem provident et voluptate pariatur. Corrupti aspernatur necessitatibus distinctio soluta.</p>
             <p>Possimus ipsam vero, iure ullam vitae magnam quidem omnis voluptatum cumque harum aut neque pariatur distinctio explicabo eveniet aliquam officia maiores iusto tenetur voluptas, voluptates eligendi dicta assumenda? Numquam, modi?</p>
             <p>Sunt quo recusandae at perferendis obcaecati error, omnis iusto optio nisi consequuntur quibusdam deleniti soluta maxime aut beatae, doloribus ad autem modi iste ea? Aliquam consequuntur velit explicabo voluptatum voluptate.</p>

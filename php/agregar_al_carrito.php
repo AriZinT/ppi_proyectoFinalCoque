@@ -27,7 +27,7 @@
             } else {
                 //si no está en el carrito, hace un insert nuevo
                 $query_insert = "INSERT INTO carrito (id_usuario, id_producto, cantidad_c) VALUES ('$id_usuario', '$id_producto', '$cantidad');";
-                echo $query_insert;
+                //echo $query_insert;
 
                 mysqli_query($con, $query_insert);
             }
@@ -112,7 +112,13 @@
         echo '<br><br><div class="alert alert-success alert-dismissible"><button type="button" class="btn-close" data-bs-dismiss="alert"></button><strong>Éxito!</strong> Tu producto se agregó correctamente al carrito.</div>';
         mysqli_close($con);
         ?>
-        <a href="productos.php" class="btn btn-danger">Seguir comprando</a>
+        <div class="mt-4">
+            <a href="productos.php" class="btn btn-danger">Volver a Productos</a>
+        </div>
+        <div class="mt-4">
+            <a href="carrito.php" class="btn btn-danger">Ir al carrito</a>
+        </div>
+
      </div>
     
 </body>
