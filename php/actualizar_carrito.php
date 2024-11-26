@@ -1,25 +1,44 @@
 <?php
-  session_start();
-  include("conexion_db.php");
+session_start();
+include("conexion_db.php");
 
-  if (!isset($_SESSION['id_usuario'])) {
-      header("Location: login.php"); //debe redirigir a login para poder agregar al carrito
-      exit();
-  }
+if (!isset($_SESSION['id_usuario'])) {
+    header("Location: login.php"); // Redirigir si no hay sesión
+    exit();
+}
 
-  $id_usuario = $_SESSION['id_usuario'];
+$id_usuario = $_SESSION['id_usuario'];
 
- //REVISAR QUE SE ELIMINE REDUCIENDO LA CANTIDAD
-  if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id_prod'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id_prod'])) {
     $id_producto = intval($_POST['id_prod']);
-    $query_eliminar = "DELETE FROM carrito WHERE id_usuario = $id_usuario AND id_producto = $id_producto;";
-    echo "id_producto:" . $id_producto;
-    echo "id_usuario: " . $id_usuario;
-    if (!mysqli_query($con, $query_eliminar)) {
-        echo '<div class="alert alert-danger">Error al eliminar el producto: ' . mysqli_error($con) . '</div>';
+
+    // Verificar la cantidad actual del producto en el carrito
+    $query_verificar = "SELECT cantidad_c FROM carrito WHERE id_usuario = $id_usuario AND id_producto = $id_producto;";
+    $result_verificar = mysqli_query($con, $query_verificar);
+
+    if ($result_verificar && mysqli_num_rows($result_verificar) > 0) {
+        $row = mysqli_fetch_assoc($result_verificar);
+        $cantidad_actual = $row['cantidad_c'];
+
+        if ($cantidad_actual > 1) {
+            //Si hay más de una una pieza en cantidad, la reduce en lugar de borrar ese registro con un update
+            $query_update = "UPDATE carrito SET cantidad_c = cantidad_c - 1 WHERE id_usuario = $id_usuario AND id_producto = $id_producto;";
+            if (!mysqli_query($con, $query_update)) {
+                echo '<div class="alert alert-danger">Error al reducir la cantidad: ' . mysqli_error($con) . '</div>';
+            }
+        } else {
+            // Si solo hay una pieza, borra el registro con un delete
+            $query_eliminar = "DELETE FROM carrito WHERE id_usuario = $id_usuario AND id_producto = $id_producto;";
+            if (!mysqli_query($con, $query_eliminar)) {
+                echo '<div class="alert alert-danger">Error al eliminar el producto: ' . mysqli_error($con) . '</div>';
+            }
+        }
+    } else {
+        echo '<div class="alert alert-danger">Producto no encontrado en el carrito.</div>';
     }
-  }
-    mysqli_close($con);
+}
+
+mysqli_close($con);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -106,13 +125,13 @@
         mysqli_close($con);
         ?>
        <div class="row justify-content-center">
-            <!--Para modificar producto-->
+            <!--Para ver producto-->
             <div class="col-md-4 mb-3">
                 <a href="productos.php" class="btn btn-danger w-100 py-3">
                     Ver productos
                 </a>
             </div>
-            <!-- Para crear nuevo producto -->
+            <!-- Para ver carrito -->
             <div class="col-md-4 mb-3">
                 <a href="carrito.php" class="btn btn-danger w-100 py-3">
                     Ver carrito
