@@ -9,7 +9,7 @@
     <title>Coque</title>
       <!-- Latest compiled and minified CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
+        
         <!-- Latest compiled JavaScript -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> 
 </head>
@@ -83,11 +83,19 @@
         </div>
         <div class="container">
             <h2 class="my-5">Acerca de Coqué</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt similique quibusdam id enim iste exercitationem sapiente error saepe aliquid amet. Dolorem provident et voluptate pariatur. Corrupti aspernatur necessitatibus distinctio soluta.</p>
-            <p>Possimus ipsam vero, iure ullam vitae magnam quidem omnis voluptatum cumque harum aut neque pariatur distinctio explicabo eveniet aliquam officia maiores iusto tenetur voluptas, voluptates eligendi dicta assumenda? Numquam, modi?</p>
-            <p>Sunt quo recusandae at perferendis obcaecati error, omnis iusto optio nisi consequuntur quibusdam deleniti soluta maxime aut beatae, doloribus ad autem modi iste ea? Aliquam consequuntur velit explicabo voluptatum voluptate.</p>
-            <p>Corporis perferendis consequuntur, labore quisquam explicabo recusandae asperiores ipsa nulla numquam quia facilis fuga quasi fugit officiis similique ullam modi nostrum illum rem sunt. Provident dolorum distinctio delectus velit a?</p>
-            <p>Possimus obcaecati accusantium ipsum ab, ducimus quisquam molestiae iusto debitis incidunt. Optio natus voluptas rem voluptatem ut nihil dolorem maiores veniam deserunt sint quaerat dicta sequi, beatae quidem assumenda recusandae.</p>
+            <h5>C O Q U É  surge del amor por la buena cocina, del cuidado a los detalles y de la pasión por los ingredientes de calidad. 
+              Cocinar es un arte y una ciencia, por lo que nuestros productos están inspirados en grandes figuras , influyentes en su ramo. </h5>
+              <br>
+              <h5>Cada receta tiene un origen especial, ya sea una herencia familiar que ha pasado de generación en generación, o la inspiración en una receta con tradición y gran riqueza cultural. </h5>
+              <br>
+            <h5>Cada detalle es lo más importante. Por eso, nuestros empaques son completamente reciclabes. Todo es elaborado con materiales especiales para evitar el uso de plásticos. El papel puede desprenderse, desdoblarse y utilizarse para notas, dibujos e incluso diseños de origami. </h5>
+            <br>
+            <h5>Te invitamos a seguir la iniciativa y compartirnos las creativas formas en las que decidas reutilizar nuestros empaques.</h5>
+            <br>
+            <h5>Gracias por elegirnos y así formar parte de un proyecto tan especial.</h5>
+            <br>
+            <p><strong>Contacto: </strong> 55 1122 3344 </p>
+            <p><strong>Instagram: </strong> <a href="https://www.instagram.com/coque_mx/" target="_blank" class="text-danger">@coque_mx</a></p>
         </div>
      </div>
     
