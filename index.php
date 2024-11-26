@@ -82,12 +82,18 @@
             <h1 class="text-danger">C O Q U É</h1>
         </div>
         <div class="container">
-            <h2 class="my-5">Bienvenido</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt similique quibusdam id enim iste exercitationem sapiente error saepe aliquid amet. Dolorem provident et voluptate pariatur. Corrupti aspernatur necessitatibus distinctio soluta.</p>
-            <p>Possimus ipsam vero, iure ullam vitae magnam quidem omnis voluptatum cumque harum aut neque pariatur distinctio explicabo eveniet aliquam officia maiores iusto tenetur voluptas, voluptates eligendi dicta assumenda? Numquam, modi?</p>
-            <p>Sunt quo recusandae at perferendis obcaecati error, omnis iusto optio nisi consequuntur quibusdam deleniti soluta maxime aut beatae, doloribus ad autem modi iste ea? Aliquam consequuntur velit explicabo voluptatum voluptate.</p>
-            <p>Corporis perferendis consequuntur, labore quisquam explicabo recusandae asperiores ipsa nulla numquam quia facilis fuga quasi fugit officiis similique ullam modi nostrum illum rem sunt. Provident dolorum distinctio delectus velit a?</p>
-            <p>Possimus obcaecati accusantium ipsum ab, ducimus quisquam molestiae iusto debitis incidunt. Optio natus voluptas rem voluptatem ut nihil dolorem maiores veniam deserunt sint quaerat dicta sequi, beatae quidem assumenda recusandae.</p>
+            <h1 class="my-5 text-danger" style="text-align: center; font-size: 2em;">Bienvenido.</h1>
+            <h2 style="text-align: center; font-size: 1.5em;">Si lo que buscas es probar algo hecho con pasión por la cocina, estás en el lugar correcto.</h2>
+            <br>
+            <br>
+            <div class="row justify-content-center">
+                    <!--Para modificar producto-->
+                    <div class="col-md-4 mb-3">
+                        <a href="php/productos.php" class="btn btn-danger w-100 py-3">
+                            Ver Productos
+                        </a>
+                    </div>
+            </div>
         </div>
      </div>
     
