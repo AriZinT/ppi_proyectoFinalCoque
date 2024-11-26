@@ -78,9 +78,15 @@
                   <li class="nav-item">
                     <a class="nav-link text-danger" href="historial.php">Tu Historial</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link text-danger" href="perfil_usuario.php">Tu Perfil</a>
-                  </li>
+                  <li class="nav-item"><a class="nav-link text-danger" href="perfil_usuario.php">Tu Perfil
+                    <?php
+                      if (isset($_SESSION['id_usuario'])){
+                        echo ": " . $_SESSION['nombre'];
+                      }else{
+                        echo '';
+                      }
+                    ?>
+                    </a></li>
                   <li class="nav-item">
                     <a class="nav-link text-danger" href="nueva_cuenta.php">Nueva Cuenta</a>
                   </li>
@@ -117,7 +123,7 @@
             <h1 class="text-danger">C O Q U É</h1>
         </div>
         <div class="container">
-            <h2 class="my-5">Carrito</h2>
+            <h2 class="my-5">Tu Carrito: <?php echo $_SESSION['nombre'] ?></h2>
             <table class="table striped">
             <thead>
                 <tr>

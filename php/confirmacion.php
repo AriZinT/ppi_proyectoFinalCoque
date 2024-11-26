@@ -45,8 +45,15 @@ $query = "INSERT INTO usuario (nombre_u, correo_u, fecha_nac_u, num_tarjeta_u, p
                   <li class="nav-item">
                     <a class="nav-link text-danger" href="historial.php">Tu Historial</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link text-danger" href="perfil_usuario.php">Tu Perfil</a>
+                  <li class="nav-item"><a class="nav-link text-danger" href="perfil_usuario.php">Tu Perfil
+                    <?php
+                      if (isset($_SESSION['id_usuario'])){
+                        echo ": " . $_SESSION['nombre'];
+                      }else{
+                        echo '';
+                      }
+                    ?>
+                    </a></li>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link text-danger" href="#">Nueva Cuenta</a>
@@ -90,7 +97,7 @@ $query = "INSERT INTO usuario (nombre_u, correo_u, fecha_nac_u, num_tarjeta_u, p
         echo '<br><br><div class="alert alert-success alert-dismissible"><button type="button" class="btn-close" data-bs-dismiss="alert"></button><strong>Éxito!</strong> Se registró correctamente</div>';
         mysqli_close($con);
         ?>
-        <a href="../index.html" class="btn btn-danger">Regresar a inicio</a>
+        <!-- <a href="../index.php" class="btn btn-danger">Regresar a inicio</a> -->
      </div>
     
 </body>

@@ -65,9 +65,15 @@
                   <li class="nav-item">
                     <a class="nav-link text-danger" href="historial.php">Tu Historial</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link text-danger" href="perfil_usuario.php">Tu Perfil</a>
-                  </li>
+                  <li class="nav-item"><a class="nav-link text-danger" href="perfil_usuario.php">Tu Perfil
+                    <?php
+                      if (isset($_SESSION['id_usuario'])){
+                        echo ": " . $_SESSION['nombre'];
+                      }else{
+                        echo '';
+                      }
+                    ?>
+                    </a></li>
                   <li class="nav-item">
                     <a class="nav-link text-danger" href="nueva_cuenta.php">Nueva Cuenta</a>
                   </li>

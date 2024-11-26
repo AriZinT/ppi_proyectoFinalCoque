@@ -70,9 +70,15 @@
                   <li class="nav-item">
                     <a class="nav-link text-danger" href="historial.php">Tu Historial</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link text-danger" href="perfil_usuario.php">Tu Perfil</a>
-                  </li>
+                  <li class="nav-item"><a class="nav-link text-danger" href="perfil_usuario.php">Tu Perfil
+                    <?php
+                      if (isset($_SESSION['id_usuario'])){
+                        echo ": " . $_SESSION['nombre'];
+                      }else{
+                        echo '';
+                      }
+                    ?>
+                    </a></li>
                   <li class="nav-item">
                     <a class="nav-link text-danger" href="nueva_cuenta.php">Nueva Cuenta</a>
                   </li>
@@ -112,13 +118,20 @@
         echo '<br><br><div class="alert alert-success alert-dismissible"><button type="button" class="btn-close" data-bs-dismiss="alert"></button><strong>Éxito!</strong> Tu producto se agregó correctamente al carrito.</div>';
         mysqli_close($con);
         ?>
-        <div class="mt-4">
-            <a href="productos.php" class="btn btn-danger">Volver a Productos</a>
+       <div class="row justify-content-center">
+            <!--Para modificar producto-->
+            <div class="col-md-4 mb-3">
+                <a href="productos.php" class="btn btn-danger w-100 py-3">
+                    Ver productos
+                </a>
+            </div>
+            <!-- Para crear nuevo producto -->
+            <div class="col-md-4 mb-3">
+                <a href="carrito.php" class="btn btn-danger w-100 py-3">
+                    Ver carrito
+                </a>
+            </div>
         </div>
-        <div class="mt-4">
-            <a href="carrito.php" class="btn btn-danger">Ir al carrito</a>
-        </div>
-
      </div>
     
 </body>
