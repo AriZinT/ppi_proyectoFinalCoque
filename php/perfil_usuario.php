@@ -1,10 +1,17 @@
 <?php
   session_start();
+  include("conexion_db.php");
 
   if (!isset($_SESSION['id_usuario'])) {
     header("Location: login.php"); //debe redirigir a login para poder agregar al carrito
     exit();
   }
+
+  $id_usuario = $_SESSION['id_usuario'];
+
+  $query_usuario="SELECT * FROM usuario WHERE id_usuario = $id_usuario;"; //checar primero en la BD que funciona el query antes de escribirlo
+  $result_usuario = mysqli_query($con,$query_usuario);
+  mysqli_close($con);
 
 ?>
 <!DOCTYPE html>
@@ -90,21 +97,20 @@
         </div>
         <div class="container">
             <h2 class="my-5">Tu Perfil de Usuario: <?php echo '<p>' . $_SESSION['nombre'] . '<p>' ?></h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt similique quibusdam id enim iste exercitationem sapiente error saepe aliquid amet. Dolorem provident et voluptate pariatur. Corrupti aspernatur necessitatibus distinctio soluta.</p>
-            <p>Possimus ipsam vero, iure ullam vitae magnam quidem omnis voluptatum cumque harum aut neque pariatur distinctio explicabo eveniet aliquam officia maiores iusto tenetur voluptas, voluptates eligendi dicta assumenda? Numquam, modi?</p>
-            <p>Sunt quo recusandae at perferendis obcaecati error, omnis iusto optio nisi consequuntur quibusdam deleniti soluta maxime aut beatae, doloribus ad autem modi iste ea? Aliquam consequuntur velit explicabo voluptatum voluptate.</p>
-            <p>Corporis perferendis consequuntur, labore quisquam explicabo recusandae asperiores ipsa nulla numquam quia facilis fuga quasi fugit officiis similique ullam modi nostrum illum rem sunt. Provident dolorum distinctio delectus velit a?</p>
-            <p>Possimus obcaecati accusantium ipsum ab, ducimus quisquam molestiae iusto debitis incidunt. Optio natus voluptas rem voluptatem ut nihil dolorem maiores veniam deserunt sint quaerat dicta sequi, beatae quidem assumenda recusandae.</p>
+            <?php
+             while($usuario = mysqli_fetch_array($result_usuario)) {
+              echo "<p><strong> Correo: </strong>" . $usuario['correo_u'] . "</p>";
+              echo "<br>";
+              echo "<p><strong> Fecha de Nacimiento: </strong>" . $usuario['fecha_nac_u'] . "</p>";
+              echo "<br>";
+              echo "<p><strong> Número de tarjeta: </strong>" . $usuario['num_tarjeta_u'] . "</p>";
+              echo "<br>";
+              echo "<p><strong> Dirección Postal: </strong>" . $usuario['direccion_postal_u'] . "</p>";
+              echo "<br>";
+              echo "<p><strong> Teléfono: </strong>" . $usuario['telefono_u'] . "</p>";
+            }
+            ?>
         </div>
      </div>
-     <?php
-      print_r($_SESSION);
-      if (isset($_SESSION['id_usuario'])){
-        echo 'sesión iniciada';
-      }else{
-        echo 'sesión no iniciada';
-      }
-     ?>
-    
 </body>
 </html>
