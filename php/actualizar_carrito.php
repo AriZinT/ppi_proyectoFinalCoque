@@ -9,49 +9,17 @@
 
   $id_usuario = $_SESSION['id_usuario'];
 
-  /*
-  if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id_producto'])) {
-    $id_producto = intval($_POST['id_producto']);
+ //REVISAR QUE SE ELIMINE REDUCIENDO LA CANTIDAD
+  if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id_prod'])) {
+    $id_producto = intval($_POST['id_prod']);
     $query_eliminar = "DELETE FROM carrito WHERE id_usuario = $id_usuario AND id_producto = $id_producto;";
+    echo "id_producto:" . $id_producto;
+    echo "id_usuario: " . $id_usuario;
     if (!mysqli_query($con, $query_eliminar)) {
         echo '<div class="alert alert-danger">Error al eliminar el producto: ' . mysqli_error($con) . '</div>';
     }
   }
-    */
-  
-
-    $query_carrito = "
-    SELECT 
-        p.id_producto AS id_prod,
-        p.nombre_p AS nombre_producto, 
-        c.cantidad_c AS cantidad, 
-        (c.cantidad_c * p.precio_p) AS total_producto
-    FROM 
-        carrito c
-    JOIN 
-        producto p ON c.id_producto = p.id_producto
-    WHERE 
-        c.id_usuario = $id_usuario;";
-
-    if (mysqli_connect_errno()) {
-        echo "<div class=\"alert alert-danger\"><strong>Error!</strong>" . mysqli_connect_error() . "</div>";
-    }
-    $result_carrito = mysqli_query($con, $query_carrito);
-    
-    $query_total = "
-    SELECT 
-        SUM(c.cantidad_c * p.precio_p) AS total_precio
-    FROM 
-        carrito c
-    JOIN 
-        producto p ON c.id_producto = p.id_producto
-    WHERE 
-        c.id_usuario = $id_usuario;";
-
-    $result_total = mysqli_query($con, $query_total);
-    $total_precio = mysqli_fetch_assoc($result_total)['total_precio'];
-
-    //mysqli_close($con);
+    mysqli_close($con);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -84,7 +52,7 @@
                     <a class="nav-link  text-danger" href="productos.php">Productos</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link text-danger" href="#">Carrito</a>
+                    <a class="nav-link text-danger" href="carrito.php">Carrito</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link text-danger" href="historial.php">Tu Historial</a>
@@ -133,36 +101,24 @@
         <div class="mt-4 p-5 bg-light text-white rounded">
             <h1 class="text-danger">C O Q U É</h1>
         </div>
-        <div class="container">
-            <h2 class="my-5">Tu Carrito: <?php echo $_SESSION['nombre'] ?></h2>
-            <table class="table striped">
-            <thead>
-                <tr>
-                    <th>Nombre del producto</th>
-                    <th>Cantidad</th>
-                    <th>Total por producto</th>
-                    <th>Edición</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                    while($row = mysqli_fetch_array($result_carrito)) {
-                        echo "<tr>";
-                        echo "<td>" . $row['nombre_producto'] . "</td>";
-                        echo "<td>" . $row['cantidad'] . "</td>";
-                        echo "<td>" . $row['total_producto'] . "</td>";
-                        echo "<td><form method='POST' action='actualizar_carrito.php'><input type='hidden' name='id_prod' value=" . $row['id_prod'] . "><button type='submit' class='btn btn-danger btn-sm'>Eliminar</button></form></td>";
-                        echo "</tr>";
-                    }
-                ?>
-            </tbody>
-        </table>
-        <p><strong>Total del carrito:</strong> $<?= number_format($total_precio, 2); ?></p>
-        <form action="realizar_compra.php" method="POST">
-          <button type="submit" class="btn btn-danger">Realizar compra</button>
-        </form>
+        <?php
+        echo '<br><br><div class="alert alert-success alert-dismissible"><button type="button" class="btn-close" data-bs-dismiss="alert"></button><strong>Éxito!</strong> Tu producto se eliminó del carrito.</div>';
+        mysqli_close($con);
+        ?>
+       <div class="row justify-content-center">
+            <!--Para modificar producto-->
+            <div class="col-md-4 mb-3">
+                <a href="productos.php" class="btn btn-danger w-100 py-3">
+                    Ver productos
+                </a>
+            </div>
+            <!-- Para crear nuevo producto -->
+            <div class="col-md-4 mb-3">
+                <a href="carrito.php" class="btn btn-danger w-100 py-3">
+                    Ver carrito
+                </a>
+            </div>
         </div>
      </div>
-     <?php mysqli_close($con); ?>
 </body>
 </html>
