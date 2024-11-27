@@ -1,74 +1,41 @@
 <?php
-    session_start();
-    include("conexion_db.php");
+  session_start();
+  include("conexion_db.php");
 
-    if (!isset($_SESSION['id_usuario'])) {
-        header("Location: login.php");
-        exit();
-    }
+  if (!isset($_SESSION['id_usuario'])) {
+      header("Location: login.php"); //debe redirigir a login para poder ver el historial
+      exit();
+  }
 
-    $id_usuario = $_SESSION['id_usuario'];
+  // Consulta para obtener toda la tabla historial_compras con joins
+  $query_historial = "
+    SELECT 
+        h.id_compra AS id_compra,
+        u.nombre_u AS nombre_usuario,
+        p.nombre_p AS nombre_producto, 
+        h.cantidad_h AS cantidad, 
+        (h.cantidad_h * p.precio_p) AS total_producto
+    FROM 
+        historial_compras h
+    JOIN 
+        producto p ON h.id_producto = p.id_producto
+    JOIN 
+        usuario u ON h.id_usuario = u.id_usuario;";
 
-    // Consulta del carrito
-    $query_carrito = "
-        SELECT 
-            c.id_producto, 
-            c.cantidad_c, 
-            p.cant_almacen_p
-        FROM 
-            carrito c
-        JOIN 
-            producto p ON c.id_producto = p.id_producto
-        WHERE 
-            c.id_usuario = $id_usuario";
-    $result_carrito = mysqli_query($con, $query_carrito);
+  $query_total_ventas = "
+    SELECT 
+        SUM(h.cantidad_h * p.precio_p) AS total_ventas
+    FROM 
+        historial_compras h
+    JOIN 
+        producto p ON h.id_producto = p.id_producto;";
 
-    // Verificar que el carrito no esté vacío
-    if (mysqli_num_rows($result_carrito) > 0) {
-        while ($row = mysqli_fetch_assoc($result_carrito)) {
-            $id_producto = $row['id_producto'];
-            $cantidad_c = $row['cantidad_c'];
-            $cant_almacen_p = $row['cant_almacen_p'];
+    $result_total_ventas = mysqli_query($con, $query_total_ventas);
+    $total_ventas = mysqli_fetch_assoc($result_total_ventas)['total_ventas'];
 
-            // Verificar inventario
-            if ($cant_almacen_p >= $cantidad_c) {
-                // Insertar en historial_compras
-                $query_historial = "
-                    INSERT INTO historial_compras (id_usuario, id_producto, cantidad_h) 
-                    VALUES ($id_usuario, $id_producto, $cantidad_c)";
-                if (!mysqli_query($con, $query_historial)) {
-                    die("Error en historial_compras: " . mysqli_error($con));
-                }
+    $result_historial = mysqli_query($con, $query_historial);
 
-                // Actualizar inventario
-                $query_update_producto = "
-                    UPDATE producto 
-                    SET cant_almacen_p = cant_almacen_p - $cantidad_c 
-                    WHERE id_producto = $id_producto";
-                if (!mysqli_query($con, $query_update_producto)) {
-                    die("Error en producto: " . mysqli_error($con));
-                }
-            } else {
-                // Inventario insuficiente
-                echo '<br><br><div class="alert alert-danger alert-dismissible"><button type="button" class="btn-close" data-bs-dismiss="alert"></button><strong>Lo sentimos!</strong> De momento no hay existencias de algunos productos seleccionados.</div>';
-
-            }
-        }
-
-        // Vaciar el carrito
-        $query_vaciar_carrito = "DELETE FROM carrito WHERE id_usuario = $id_usuario";
-        if (!mysqli_query($con, $query_vaciar_carrito)) {
-            die("Error al vaciar el carrito: " . mysqli_error($con));
-        }
-
-        // Compra exitosa
-        echo '<br><br><div class="alert alert-success alert-dismissible"><button type="button" class="btn-close" data-bs-dismiss="alert"></button><strong>Transacción exitosa!</strong> Muchas gracias por tu compra.</div>';
-        mysqli_close($con);
-    } else {
-        // Carrito vacío
-        echo '<br><br><div class="alert alert-danger alert-dismissible"><button type="button" class="btn-close" data-bs-dismiss="alert"></button><strong>Lo sentimos!</strong> Parece que tu carrito está vacío.</div>';
-        mysqli_close($con);
-    }
+    mysqli_close($con);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -153,9 +120,32 @@
             <h1 class="text-danger">C O Q U É</h1>
         </div>
         <div class="container">
-        <form action="historial.php" method="POST">
-          <button type="submit" class="btn btn-danger">Ver historial de compras</button>
-        </form>
+          <h2 class="my-5">Tu historial de compras: <?php echo $_SESSION['nombre'] ?></h2>
+            <table class="table striped">
+            <thead>
+                <tr>
+                    <th>ID de compra</th>
+                    <th>Nombre del usuario</th>
+                    <th>Nombre del producto</th>
+                    <th>Cantidad</th>
+                    <th>Total por orden</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    while($row = mysqli_fetch_array($result_historial)) {
+                        echo "<tr>";
+                        echo "<td>" . $row['id_compra'] . "</td>";
+                        echo "<td>" . $row['nombre_usuario'] . "</td>";
+                        echo "<td>" . $row['nombre_producto'] . "</td>";
+                        echo "<td>" . $row['cantidad'] . "</td>";
+                        echo "<td>" . $row['total_producto'] . "</td>";
+                        echo "</tr>";
+                    }
+                ?>
+            </tbody>
+        </table>
+        <p><strong>Importe total de ventas:</strong> $<?= number_format($total_ventas, 2); ?></p>
         </div>
      </div>
     

@@ -63,9 +63,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   <li class="nav-item">
                     <a class="nav-link text-danger" href="nueva_cuenta.php">Nueva Cuenta</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link text-danger" href="admin.php">Administración</a>
-                  </li>
+                  <?php if (isset($_SESSION['id_usuario']) && $_SESSION['id_usuario'] == 10): ?>
+                    <li class="nav-item">
+                      <a class="nav-link text-danger" href="admin.php">Administración</a>
+                    </li>
+                  <?php endif; ?>
                   <li class="nav-item">
                     <a class="nav-link text-danger" href="../about.php">Acerca de Nosotros</a>
                   </li>

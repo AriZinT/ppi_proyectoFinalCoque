@@ -82,9 +82,11 @@
                   <li class="nav-item">
                     <a class="nav-link text-danger" href="nueva_cuenta.php">Nueva Cuenta</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link text-danger" href="admin.php">Administración</a>
-                  </li>
+                  <?php if (isset($_SESSION['id_usuario']) && $_SESSION['id_usuario'] == 10): ?>
+                    <li class="nav-item">
+                      <a class="nav-link text-danger" href="admin.php">Administración</a>
+                    </li>
+                  <?php endif; ?>
                   <li class="nav-item">
                     <a class="nav-link text-danger" href="../about.php">Acerca de Nosotros</a>
                   </li>
@@ -114,10 +116,7 @@
         <div class="mt-4 p-5 bg-light text-white rounded">
             <h1 class="text-danger">C O Q U É</h1>
         </div>
-        <?php
-        echo '<br><br><div class="alert alert-success alert-dismissible"><button type="button" class="btn-close" data-bs-dismiss="alert"></button><strong>Éxito!</strong> Tu producto se agregó correctamente al carrito.</div>';
-        mysqli_close($con);
-        ?>
+        <div class="alert alert-success alert-dismissible"><button type="button" class="btn-close" data-bs-dismiss="alert"></button><strong>Éxito!</strong> Tu producto se agregó correctamente al carrito.</div>       
        <div class="row justify-content-center">
             <!--Para modificar producto-->
             <div class="col-md-4 mb-3">

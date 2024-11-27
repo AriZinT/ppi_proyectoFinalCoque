@@ -58,9 +58,11 @@ $query = "INSERT INTO usuario (nombre_u, correo_u, fecha_nac_u, num_tarjeta_u, p
                   <li class="nav-item">
                     <a class="nav-link text-danger" href="#">Nueva Cuenta</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link text-danger" href="admin.php">Administración</a>
-                  </li>
+                  <?php if (isset($_SESSION['id_usuario']) && $_SESSION['id_usuario'] == 10): ?>
+                    <li class="nav-item">
+                      <a class="nav-link text-danger" href="admin.php">Administración</a>
+                    </li>
+                  <?php endif; ?>
                   <li class="nav-item">
                     <a class="nav-link text-danger" href="../about.php">Acerca de Nosotros</a>
                   </li>

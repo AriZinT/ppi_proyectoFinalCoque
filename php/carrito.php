@@ -9,15 +9,6 @@
 
   $id_usuario = $_SESSION['id_usuario'];
 
-  /*
-  if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id_producto'])) {
-    $id_producto = intval($_POST['id_producto']);
-    $query_eliminar = "DELETE FROM carrito WHERE id_usuario = $id_usuario AND id_producto = $id_producto;";
-    if (!mysqli_query($con, $query_eliminar)) {
-        echo '<div class="alert alert-danger">Error al eliminar el producto: ' . mysqli_error($con) . '</div>';
-    }
-  }
-    */
   
 
     $query_carrito = "
@@ -101,9 +92,11 @@
                   <li class="nav-item">
                     <a class="nav-link text-danger" href="nueva_cuenta.php">Nueva Cuenta</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link text-danger" href="admin.php">Administración</a>
-                  </li>
+                  <?php if (isset($_SESSION['id_usuario']) && $_SESSION['id_usuario'] == 10): ?>
+                    <li class="nav-item">
+                      <a class="nav-link text-danger" href="admin.php">Administración</a>
+                    </li>
+                  <?php endif; ?>
                   <li class="nav-item">
                     <a class="nav-link text-danger" href="../about.php">Acerca de Nosotros</a>
                   </li>

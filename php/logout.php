@@ -39,9 +39,6 @@ session_start(); // Inicia la sesión
                     <a class="nav-link text-danger" href="nueva_cuenta.php">Nueva Cuenta</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link text-danger" href="admin.php">Administración</a>
-                  </li>
-                  <li class="nav-item">
                     <a class="nav-link text-danger" href="../about.php">Acerca de Nosotros</a>
                   </li>
                   <li class="nav-item">
