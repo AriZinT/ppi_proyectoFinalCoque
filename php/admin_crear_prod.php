@@ -1,5 +1,15 @@
 <?php
-  session_start();
+  session_start(); //inicia la sesión de php
+
+  if (!isset($_SESSION['id_usuario']) || $_SESSION['id_usuario'] != 10) {
+    header("Location: login.php"); //redirige si no es administrador
+    exit();
+}
+
+if (!isset($_SESSION['admin_confirmado']) || $_SESSION['admin_confirmado'] !== true) {
+    header("Location: admin_login.php"); //manda ahora sí a a la página de login de administrador
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,18 +24,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-    <?php
-    include("conexion_db.php");
-
-    //obtengo las categorías
-    $sql = "SELECT id_categoria, nombre_cat FROM categoria";
-    $result = mysqli_query($con, $sql);
-
-    //valido si la consulta tiene errores
-    if (!$result) {
-        die("Error en la consulta SQL: " . mysqli_error($con));
-    }
-    ?>
     <!-- Contenedor principal de BS5 -->
     <div class="container-fluid">
         <nav class="navbar navbar-expand-sm bg-light navbar-light">
@@ -52,7 +50,7 @@
                         <li class="nav-item"><a class="nav-link text-danger" href="nueva_cuenta.php">Nueva Cuenta</a></li>
                         <?php if (isset($_SESSION['id_usuario']) && $_SESSION['id_usuario'] == 10): ?>
                             <li class="nav-item">
-                            <a class="nav-link text-danger" href="admin.php">Administración</a>
+                            <a class="nav-link text-danger" href="admin_login.php">Administración</a>
                             </li>
                         <?php endif; ?>
                         <li class="nav-item"><a class="nav-link text-danger" href="../about.php">Acerca de Nosotros</a></li>
@@ -84,7 +82,7 @@
         </div>
         <div class="container">
             <h2 class="my-5">Creación de nuevo producto</h2>
-            <form action="confirmacion.php" method="post" enctype="multipart/form-data">
+            <form action="admin_confirmar_carga_prod.php" method="post" enctype="multipart/form-data">
                 <div class="mb-3 mt-3">
                     <label for="nombre_p" class="form-label">Nombre:</label>
                     <input type="text" class="form-control" id="nombre_p" placeholder="Ingrese el nombre del producto" name="nombre_p" required>
@@ -107,23 +105,19 @@
                 </div>
                 <div class="mb-3 mt-3">
                     <label for="id_categoria" class="form-label">Categoría:</label>
-                    <select class="form-select" id="id_categoria" name="id_categoria" required>
-                        <option value="" disabled selected>Seleccione una categoría</option>
-                        <?php
-                        if (mysqli_num_rows($result) > 0) {
-                            while ($fila = mysqli_fetch_assoc($result)) {
-                                echo '<option value="' . $fila["id_categoria"] . '">' . $fila["nombre_cat"] . '</option>';
-                            }
-                        } else {
-                            echo '<option value="" disabled>No hay categorías disponibles</option>';
-                        }
-                        ?>
-                    </select>
+                    <p>Seleccione una de las siguientes:<p>
+                        <ul>1: Pasteles y Tartas</ul>
+                        <ul>2: Galletas y Panecillos</ul>
+                        <ul>3: Otros Postres</ul>
+                        <ul>4: Panes dulces</ul>
+                        <ul>5: Panes Salados</ul>
+                        <ul>6: Acompañamientos</ul>
+                        <!-- Abajo: se controla con min y max que las flechas solo puedan elegir entre 1 y 6, pero el usuario podría ingresar otro número, eso se valida en admin_confirmar_carga_prod -->
+                    <input type="number" class="form-control" id="id_categoria" placeholder="Ingrese el ID de categoría" name="id_categoria" min="1" max="6" required>
                 </div>
                 <button type="submit" class="btn btn-danger mb-3">Registrar</button>
             </form>
         </div>
     </div>
-    <?php mysqli_close($con); ?>
 </body>
 </html>
