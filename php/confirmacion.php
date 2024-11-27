@@ -1,5 +1,6 @@
 <?php
 include("conexion_db.php");
+//limpieza caracteres de escape
 $nombre = mysqli_real_escape_string($con, $_POST["nombre_u"]);
 $correo = mysqli_real_escape_string($con, $_POST["correo_u"]);
 $fecha = mysqli_real_escape_string($con, $_POST["fecha_nac_u"]);
@@ -7,6 +8,7 @@ $tarjeta = mysqli_real_escape_string($con, $_POST["num_tarjeta_u"]);
 $passwd = mysqli_real_escape_string($con, $_POST["passwd_u"]);
 $direccion = mysqli_real_escape_string($con, $_POST["direccion_postal_u"]);
 $telefono = mysqli_real_escape_string($con, $_POST["telefono_u"]);
+//query para insertar los datos del nuevo usuario
 $query = "INSERT INTO usuario (nombre_u, correo_u, fecha_nac_u, num_tarjeta_u, passwd_u, direccion_postal_u, telefono_u) VALUES ('$nombre', '$correo', '$fecha', '$tarjeta', '$passwd', '$direccion', '$telefono');";
 ?>
 <!DOCTYPE html>
@@ -60,7 +62,7 @@ $query = "INSERT INTO usuario (nombre_u, correo_u, fecha_nac_u, num_tarjeta_u, p
                   </li>
                   <?php if (isset($_SESSION['id_usuario']) && $_SESSION['id_usuario'] == 10): ?>
                     <li class="nav-item">
-                      <a class="nav-link text-danger" href="admin.php">Administración</a>
+                      <a class="nav-link text-danger" href="admin_login.php">Administración</a>
                     </li>
                   <?php endif; ?>
                   <li class="nav-item">

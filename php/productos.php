@@ -79,7 +79,7 @@
                   </li>
                   <?php if (isset($_SESSION['id_usuario']) && $_SESSION['id_usuario'] == 10): ?>
                     <li class="nav-item">
-                      <a class="nav-link text-danger" href="admin.php">Administración</a>
+                      <a class="nav-link text-danger" href="admin_login.php">Administración</a>
                     </li>
                   <?php endif; ?>
                   <li class="nav-item">
@@ -116,6 +116,7 @@
             <div class="row">
                 <?php foreach ($productos as $producto): ?>
                     <div class="col-md-4 mb-4">
+                      <!--tarjetitas de bootstrap  -->
                         <div class="card h-100">
                             <img src="data:image/jpeg;base64,<?= base64_encode($producto['foto_producto']); ?>" class="card-img-top" alt="<?= htmlspecialchars($producto['nombre_producto']); ?>">
                             <div class="card-body">

@@ -51,7 +51,7 @@
                   </li>
                   <?php if (isset($_SESSION['id_usuario']) && $_SESSION['id_usuario'] == 10): ?>
                     <li class="nav-item">
-                      <a class="nav-link text-danger" href="php/admin.php">Administración</a>
+                      <a class="nav-link text-danger" href="php/admin_login.php">Administración</a>
                     </li>
                   <?php endif; ?>
                   <li class="nav-item">
@@ -80,9 +80,35 @@
               </div>
             </div>
           </nav> 
-        <div class="mt-4 p-5 bg-light text-white rounded">
-            <h1 class="text-danger">C O Q U É</h1>
-        </div>
+                  <!--https://www.w3schools.com/bootstrap5/bootstrap_carousel.php -->
+                  <!-- Carousel -->
+          <div id="demo" class="carousel slide" data-bs-ride="carousel">
+
+          <!-- Indicators/dots -->
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+          </div>
+
+          <!-- The slideshow/carousel -->
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="img/nombre.jpg" alt="Coque" class="d-block" style="width:100%">
+            </div>
+            <div class="carousel-item">
+              <img src="img/ladybug.jpg" alt="Catarina" class="d-block" style="width:100%">
+            </div>
+          </div>
+
+          <!-- Left and right controls/icons -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </button>
+          </div>
+
         <div class="container">
             <h1 class="my-5 text-danger" style="text-align: center; font-size: 2em;">Bienvenido.</h1>
             <h2 style="text-align: center; font-size: 1.5em;">Si lo que buscas es probar algo hecho con pasión por la cocina, estás en el lugar correcto.</h2>

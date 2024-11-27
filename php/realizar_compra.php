@@ -9,7 +9,7 @@
 
     $id_usuario = $_SESSION['id_usuario'];
 
-    // Consulta del carrito
+    //query del carrito
     $query_carrito = "
         SELECT 
             c.id_producto, 
@@ -23,16 +23,16 @@
             c.id_usuario = $id_usuario";
     $result_carrito = mysqli_query($con, $query_carrito);
 
-    // Verificar que el carrito no esté vacío
+    //checa que el carrito no esté vacío
     if (mysqli_num_rows($result_carrito) > 0) {
         while ($row = mysqli_fetch_assoc($result_carrito)) {
             $id_producto = $row['id_producto'];
             $cantidad_c = $row['cantidad_c'];
             $cant_almacen_p = $row['cant_almacen_p'];
 
-            // Verificar inventario
+            //checa inventario
             if ($cant_almacen_p >= $cantidad_c) {
-                // Insertar en historial_compras
+                //hace el isnert en historial_compras
                 $query_historial = "
                     INSERT INTO historial_compras (id_usuario, id_producto, cantidad_h) 
                     VALUES ($id_usuario, $id_producto, $cantidad_c)";
@@ -40,7 +40,7 @@
                     die("Error en historial_compras: " . mysqli_error($con));
                 }
 
-                // Actualizar inventario
+                //hace el update del inventario
                 $query_update_producto = "
                     UPDATE producto 
                     SET cant_almacen_p = cant_almacen_p - $cantidad_c 
@@ -49,21 +49,22 @@
                     die("Error en producto: " . mysqli_error($con));
                 }
             } else {
-                // Inventario insuficiente
+                //inventario insuficiente
                 echo '<br><br><div class="alert alert-danger alert-dismissible"><button type="button" class="btn-close" data-bs-dismiss="alert"></button><strong>Lo sentimos!</strong> De momento no hay existencias de algunos productos seleccionados.</div>';
-
+                $bandera = 1; //para evitar que también salga la alerta de transacción exitosa
             }
         }
 
-        // Vaciar el carrito
+        //limpia el carrito
         $query_vaciar_carrito = "DELETE FROM carrito WHERE id_usuario = $id_usuario";
         if (!mysqli_query($con, $query_vaciar_carrito)) {
             die("Error al vaciar el carrito: " . mysqli_error($con));
         }
+        if($bandera!=1){ //compra exitosa (para no imprimir la alerta de compra exitosa)
+          echo '<br><br><div class="alert alert-success alert-dismissible"><button type="button" class="btn-close" data-bs-dismiss="alert"></button><strong>Transacción exitosa!</strong> Muchas gracias por tu compra.</div>';
+          mysqli_close($con);
+        }
 
-        // Compra exitosa
-        echo '<br><br><div class="alert alert-success alert-dismissible"><button type="button" class="btn-close" data-bs-dismiss="alert"></button><strong>Transacción exitosa!</strong> Muchas gracias por tu compra.</div>';
-        mysqli_close($con);
     } else {
         // Carrito vacío
         echo '<br><br><div class="alert alert-danger alert-dismissible"><button type="button" class="btn-close" data-bs-dismiss="alert"></button><strong>Lo sentimos!</strong> Parece que tu carrito está vacío.</div>';
@@ -120,7 +121,7 @@
                   </li>
                   <?php if (isset($_SESSION['id_usuario']) && $_SESSION['id_usuario'] == 10): ?>
                     <li class="nav-item">
-                      <a class="nav-link text-danger" href="admin.php">Administración</a>
+                      <a class="nav-link text-danger" href="admin_login.php">Administración</a>
                     </li>
                   <?php endif; ?>
                   <li class="nav-item">
@@ -152,7 +153,7 @@
         <div class="mt-4 p-5 bg-light text-white rounded">
             <h1 class="text-danger">C O Q U É</h1>
         </div>
-        <div class="container">
+        <div class="container mb-5 mt-5">
         <form action="historial.php" method="POST">
           <button type="submit" class="btn btn-danger">Ver historial de compras</button>
         </form>

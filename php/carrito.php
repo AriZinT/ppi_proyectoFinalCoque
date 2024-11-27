@@ -10,7 +10,7 @@
   $id_usuario = $_SESSION['id_usuario'];
 
   
-
+    //para ver todo el carrito del usuario con la sesión activa, con join a producto para ver el nombre del prod
     $query_carrito = "
     SELECT 
         p.id_producto AS id_prod,
@@ -28,7 +28,7 @@
         echo "<div class=\"alert alert-danger\"><strong>Error!</strong>" . mysqli_connect_error() . "</div>";
     }
     $result_carrito = mysqli_query($con, $query_carrito);
-    
+    //query para ver el total acumulado
     $query_total = "
     SELECT 
         SUM(c.cantidad_c * p.precio_p) AS total_precio
@@ -42,7 +42,6 @@
     $result_total = mysqli_query($con, $query_total);
     $total_precio = mysqli_fetch_assoc($result_total)['total_precio'];
 
-    //mysqli_close($con);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -94,7 +93,7 @@
                   </li>
                   <?php if (isset($_SESSION['id_usuario']) && $_SESSION['id_usuario'] == 10): ?>
                     <li class="nav-item">
-                      <a class="nav-link text-danger" href="admin.php">Administración</a>
+                      <a class="nav-link text-danger" href="admin_login.php">Administración</a>
                     </li>
                   <?php endif; ?>
                   <li class="nav-item">
@@ -154,6 +153,12 @@
         <form action="realizar_compra.php" method="POST">
           <button type="submit" class="btn btn-danger">Realizar compra</button>
         </form>
+              <!--botón para seguir comprando-->
+              <div class="col-md-4 mb-3 mt-3">
+                  <a href="productos.php" class="btn btn-danger w-40 py-1">
+                      Ver productos
+                  </a>
+              </div>
         </div>
      </div>
      <?php mysqli_close($con); ?>

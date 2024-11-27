@@ -3,17 +3,17 @@ session_start(); // Inicia la sesión
 include 'conexion_db.php'; // Conexión a la base de datos
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $correo = mysqli_real_escape_string($con, $_POST['correo']);
-    $passwd = mysqli_real_escape_string($con, $_POST['passwd']);
+    $correo = mysqli_real_escape_string($con, $_POST['correo']); //se guarda el correo en variable temp
+    $passwd = mysqli_real_escape_string($con, $_POST['passwd']); //se guarda el password en varioable temp
 
-    $query = "SELECT * FROM usuario WHERE correo_u='$correo' AND passwd_u='$passwd'";
+    $query = "SELECT * FROM usuario WHERE correo_u='$correo' AND passwd_u='$passwd'"; //se busca el usuario donde coinciden esos
     $result = mysqli_query($con, $query);
 //mysqli_num_rows devuelve la cantidad de líneas que devuelve el query, sería 0 si no hay coincidencia, 1 si la hay
     if (mysqli_num_rows($result) == 1) {
         $usuario = mysqli_fetch_assoc($result);
-        $_SESSION['id_usuario'] = $usuario['id_usuario'];
+        $_SESSION['id_usuario'] = $usuario['id_usuario']; //y se toman como variables para la sesión
         $_SESSION['nombre'] = $usuario['nombre_u'];
-        header("Location: perfil_usuario.php"); // Redirige al perfil, indica al navegador que se diriga a otro lado
+        header("Location: perfil_usuario.php"); // indica al navegador que se diriga al perfil
     } else {
         $error = "Correo o contraseña incorrectos";
     }
@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   </li>
                   <?php if (isset($_SESSION['id_usuario']) && $_SESSION['id_usuario'] == 10): ?>
                     <li class="nav-item">
-                      <a class="nav-link text-danger" href="admin.php">Administración</a>
+                      <a class="nav-link text-danger" href="admin_login.php">Administración</a>
                     </li>
                   <?php endif; ?>
                   <li class="nav-item">
@@ -113,6 +113,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <button type="submit" class="btn btn-danger">Iniciar Sesión</button>
         </form>
+        <!--la liga que dirige al usuario sin cuenta a crearse una -->
         <p class="mt-3">¿No tienes cuenta? <a href="nueva_cuenta.php" class="text-danger">Regístrate aquí</a>.</p>
     </div>
     <?php mysqli_close($con); ?>

@@ -8,7 +8,7 @@
   }
 
   $id_usuario = $_SESSION['id_usuario'];
-
+  //query que saca toda la info del usuario activo
   $query_usuario="SELECT * FROM usuario WHERE id_usuario = $id_usuario;"; //checar primero en la BD que funciona el query antes de escribirlo
   $result_usuario = mysqli_query($con,$query_usuario);
   mysqli_close($con);
@@ -65,7 +65,7 @@
                   </li>
                   <?php if (isset($_SESSION['id_usuario']) && $_SESSION['id_usuario'] == 10): ?>
                     <li class="nav-item">
-                      <a class="nav-link text-danger" href="admin.php">Administración</a>
+                      <a class="nav-link text-danger" href="admin_login.php">Administración</a>
                     </li>
                   <?php endif; ?>
                   <li class="nav-item">

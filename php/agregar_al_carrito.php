@@ -12,10 +12,9 @@
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id_producto'])) {
             $id_usuario = $_SESSION['id_usuario'];
             $id_producto = intval($_POST['id_producto']);
-            // echo $id_producto;
             $cantidad = 1; //solo se puede de uno en uno
 
-            // Verificar si el producto ya está en el carrito del usuario
+            //revisa si el producto ya está en el carrito del usuario
             $query_revisa = "SELECT * FROM carrito WHERE id_usuario = '$id_usuario' AND id_producto = '$id_producto';";
             $result_revisa = mysqli_query($con, $query_revisa);
             // echo mysqli_num_rows($result_revisa);
@@ -84,7 +83,7 @@
                   </li>
                   <?php if (isset($_SESSION['id_usuario']) && $_SESSION['id_usuario'] == 10): ?>
                     <li class="nav-item">
-                      <a class="nav-link text-danger" href="admin.php">Administración</a>
+                      <a class="nav-link text-danger" href="admin_login.php">Administración</a>
                     </li>
                   <?php endif; ?>
                   <li class="nav-item">

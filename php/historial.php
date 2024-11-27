@@ -9,7 +9,7 @@
 
   $id_usuario = $_SESSION['id_usuario'];
 
-
+    //query para ver el historial completo del usuario activo
     $query_carrito = "
     SELECT 
         p.nombre_p AS nombre_producto, 
@@ -26,7 +26,7 @@
         echo "<div class=\"alert alert-danger\"><strong>Error!</strong>" . mysqli_connect_error() . "</div>";
     }
     $result_carrito = mysqli_query($con, $query_carrito);
-    
+    //query para ver su total gastado en tienda
     $query_total = "
     SELECT 
         SUM(h.cantidad_h * p.precio_p) AS total_precio
@@ -92,7 +92,7 @@
                   </li>
                   <?php if (isset($_SESSION['id_usuario']) && $_SESSION['id_usuario'] == 10): ?>
                     <li class="nav-item">
-                      <a class="nav-link text-danger" href="admin.php">Administración</a>
+                      <a class="nav-link text-danger" href="admin_login.php">Administración</a>
                     </li>
                   <?php endif; ?>
                   <li class="nav-item">

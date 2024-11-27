@@ -1,5 +1,5 @@
 <?php
-session_start(); // Inicia la sesión
+session_start(); //inicia la sesión
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,8 +55,8 @@ session_start(); // Inicia la sesión
     <div class="container mt-5">
         <h2 class="text-center">Sesión Cerrada</h2>
         <?php
-            session_unset();
-            session_destroy();
+            session_unset(); //desconfigura las variables de sesión
+            session_destroy(); //destruye la info asociada a una sesión
         ?>
         <a href="../index.php" class="btn btn-danger">Regresar al Inicio</a>
     </div>

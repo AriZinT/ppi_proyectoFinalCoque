@@ -2,12 +2,17 @@
   session_start();
   include("conexion_db.php");
 
-  if (!isset($_SESSION['id_usuario'])) {
-      header("Location: login.php"); //debe redirigir a login para poder ver el historial
-      exit();
-  }
+  if (!isset($_SESSION['id_usuario']) || $_SESSION['id_usuario'] != 10) {
+    header("Location: login.php"); // Redirigir si no es administrador
+    exit();
+}
 
-  // Consulta para obtener toda la tabla historial_compras con joins
+if (!isset($_SESSION['admin_confirmado']) || $_SESSION['admin_confirmado'] !== true) {
+    header("Location: admin_login.php"); //manda ahora sí a a la página de login de administrador
+    exit();
+}
+
+  //query para obtener toda la tabla historial_compras con joins
   $query_historial = "
     SELECT 
         h.id_compra AS id_compra,
@@ -21,7 +26,7 @@
         producto p ON h.id_producto = p.id_producto
     JOIN 
         usuario u ON h.id_usuario = u.id_usuario;";
-
+  //query para sumar el total de ventas
   $query_total_ventas = "
     SELECT 
         SUM(h.cantidad_h * p.precio_p) AS total_ventas
@@ -87,7 +92,7 @@
                   </li>
                   <?php if (isset($_SESSION['id_usuario']) && $_SESSION['id_usuario'] == 10): ?>
                     <li class="nav-item">
-                      <a class="nav-link text-danger" href="admin.php">Administración</a>
+                      <a class="nav-link text-danger" href="admin_login.php">Administración</a>
                     </li>
                   <?php endif; ?>
                   <li class="nav-item">
@@ -120,7 +125,7 @@
             <h1 class="text-danger">C O Q U É</h1>
         </div>
         <div class="container">
-          <h2 class="my-5">Tu historial de compras: <?php echo $_SESSION['nombre'] ?></h2>
+          <h2 class="my-5">Historial de compras general (Reporte de ventas): <?php echo $_SESSION['nombre'] ?></h2>
             <table class="table striped">
             <thead>
                 <tr>

@@ -51,7 +51,7 @@
                   </li>
                   <?php if (isset($_SESSION['id_usuario']) && $_SESSION['id_usuario'] == 10): ?>
                     <li class="nav-item">
-                      <a class="nav-link text-danger" href="php/admin.php">Administración</a>
+                      <a class="nav-link text-danger" href="php/admin_login.php">Administración</a>
                     </li>
                   <?php endif; ?>
                   <li class="nav-item">
