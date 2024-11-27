@@ -2,6 +2,17 @@
 
 <?php
   session_start();
+
+  if (!isset($_SESSION['id_usuario']) || $_SESSION['id_usuario'] != 10) {
+    header("Location: login.php"); // Redirigir si no es administrador
+    exit();
+}
+
+if (!isset($_SESSION['admin_confirmado']) || $_SESSION['admin_confirmado'] !== true) {
+    header("Location: admin_login.php"); //manda ahora sí a a la página de login de administrador
+    exit();
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,7 +65,7 @@
                   </li>
                   <?php if (isset($_SESSION['id_usuario']) && $_SESSION['id_usuario'] == 10): ?>
                     <li class="nav-item">
-                      <a class="nav-link text-danger" href="admin.php">Administración</a>
+                      <a class="nav-link text-danger" href="admin_login.php">Administración</a>
                     </li>
                   <?php endif; ?>
                   <li class="nav-item">
@@ -90,22 +101,22 @@
               <div class="container my-5">
                 <h2 class="text-center mb-4">Opciones de Administración</h2>
                 <div class="row justify-content-center">
-                    <!--Para modificar producto-->
+                    <!--Para ver inventario y modificar prod-->
                     <div class="col-md-4 mb-3">
-                        <a href="admin_modificar_prod.php" class="btn btn-danger w-100 py-3">
-                            Modificar Producto
+                        <a href="admin_inventario.php" class="btn btn-danger w-100 py-3">
+                            Administrar Inventario
                         </a>
                     </div>
-                    <!-- Para crear nuevo producto -->
+                    <!--aquí para crear nuevo producto -->
                     <div class="col-md-4 mb-3">
                         <a href="admin_crear_prod.php" class="btn btn-danger w-100 py-3">
                             Crear Producto
                         </a>
                     </div>
-                    <!--para historial de compras-->
+                    <!--para ver historial de compras-->
                     <div class="col-md-4 mb-3">
                         <a href="admin_mostrar_historial.php" class="btn btn-danger text-white w-100 py-3">
-                            Mostrar Historial
+                            Mostrar Historial de Compras
                         </a>
                     </div>
                 </div>
